@@ -5,7 +5,7 @@ from response.response import Response
 from django.views.generic import View
 
 
-class RequestJsonDataValidator(View):
+class JsonCreateView(View):
     """
     This class bounds all methods necessary to validate request data and provide a formatted output
     """
@@ -127,7 +127,7 @@ class RequestJsonDataValidator(View):
         Returns all params given in a validation rule.
         :return: all params in a given validation rule
         """
-        return [*self.validation_rule]
+        return [*self.validation_rule['fields']]
 
     def save(self, data=None):
         """
