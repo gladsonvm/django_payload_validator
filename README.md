@@ -1,7 +1,7 @@
 # Django json data validator
 This package can validate data provided in django request body. This is similar to django forms, but only different being this works on json data provided throuogh body of a request rather than HTML forms.
 
-###Usage
+### Usage
 
 ```
 class TeamCreateView(JsonCreateView):
@@ -9,7 +9,7 @@ class TeamCreateView(JsonCreateView):
     validation_rule = <validation_rule>
 ```
 
-###Example
+### Example
 
 ```
 class TeamCreateView(JsonCreateView):
@@ -19,7 +19,7 @@ class TeamCreateView(JsonCreateView):
 
 ### Concepts:
 
-- #####validation_rule
+- ##### validation_rule
    - A validation rule defines all fields those are meant to be validated.
    - Validation rule is a dictionary which defines 
       * fields
