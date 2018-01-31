@@ -1,5 +1,5 @@
-# Django json data validator
-This package can validate data provided in django request body. This is similar to django forms, but only different being this works on json data provided throuogh body of a request rather than HTML forms.
+# Django payload validator
+This package can validate data provided as payload in request body. This is similar to django forms, but only different being this works on json data provided throuogh body of a request rather than HTML forms.
 
 ### Usage
 
