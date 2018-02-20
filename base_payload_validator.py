@@ -1,16 +1,7 @@
-import json
-from django.http import JsonResponse
-from operator import attrgetter
-from response.response import Response
-from django.views.generic import View
-
-
-class JsonCreateView(View):
+class PayloadValidator(object):
     """
     This class bounds all methods necessary to validate request data and provide a formatted output
     """
-    error_dict = dict()
-
     def validate_request_data(self):
         """
         This method is the entry point for provide formatted data after successful validation.
@@ -32,6 +23,7 @@ class JsonCreateView(View):
                 return False
         return True
 
+
     def validate_mandatory_params(self):
         """
         This method checks if all mandatory params are there in a given json.
@@ -41,8 +33,9 @@ class JsonCreateView(View):
         if mandatory_params:
             if len([x for x in [*mandatory_params] if x not in [*self.data]]):
                 return False, {'error': 'mandatory params missing. mandatory parameters are {mandatory_params}'
-                                        .format(mandatory_params=mandatory_params)}
+                    .format(mandatory_params=mandatory_params)}
         return True,
+
 
     def validate_request_body(self):
         """
@@ -54,6 +47,7 @@ class JsonCreateView(View):
         except:
             return False, {'error': 'provide a valid json.'}
         return True,
+
 
     def validate_allowed_params(self):
         """
@@ -69,12 +63,14 @@ class JsonCreateView(View):
                 .format(invalid_params=invalid_params)}
         return True,
 
+
     def get_validation_rule(self):
         """
         return validation rule specified in inherited class.
         :return: self.validation rule, a json.
         """
         return self.validation_rule
+
 
     def is_valid(self):
         """
@@ -84,6 +80,7 @@ class JsonCreateView(View):
         validation_response = self.validate_request_data()
         return validation_response
 
+
     def json_valid(self):
         """
         triggered if a json is validated successfully against a given rule.
@@ -92,6 +89,7 @@ class JsonCreateView(View):
         self.object = self.save()
         return JsonResponse(self.render_json(self.object, status_code=201))
 
+
     def json_invalid(self):
         """
         invoked if a json is not validated successfully against a given rule.
@@ -99,17 +97,6 @@ class JsonCreateView(View):
         """
         return JsonResponse(self.error_dict, status=400)
 
-    def post(self, request, *args, **kwargs):
-        """
-        Override post method to make calls to self.is_valid()
-        and go on with further proceedings.
-        :param request: WSGI Request
-        :return: Json serialized object if validation passes
-        errors as json if validation fails.
-        """
-        if self.is_valid():
-            return self.json_valid()
-        return self.json_invalid()
 
     def get_mandatory_param(self):
         """
@@ -122,12 +109,14 @@ class JsonCreateView(View):
 
         return mandatory_params if mandatory_params else None
 
+
     def get_all_params(self):
         """
         Returns all params given in a validation rule.
         :return: all params in a given validation rule
         """
         return [*self.validation_rule['fields']]
+
 
     def save(self, data=None):
         """
@@ -141,6 +130,7 @@ class JsonCreateView(View):
             data.update({k: attrgetter(v)(self) for k, v in self.auto_populate_fields.items()})
         self.instance = self.model.objects.create(**data)
         return self.instance
+
 
     def render_json(self, obj, status_code):
         """
