@@ -8,7 +8,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-    name='django-payload-validator',
+    name='django_payload_validator',
     version='1.0.0',
     description='validator for django payload',
     long_description=long_description,
@@ -28,7 +28,7 @@ setup(
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
     ],
-    keywords='django payload validator intended audience --> dev',
+    keywords='django payload validator intended audience is dev',
     packages=find_packages(exclude=['contrib', 'docs', 'tests']),
     install_requires=['django']
 )
