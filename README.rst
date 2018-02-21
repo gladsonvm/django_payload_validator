@@ -11,7 +11,7 @@ This package can validate data provided as payload in request body. This is simi
 ### Usage
 
 ```
-class TeamCreateView(JsonCreateView):
+class TeamCreateView(BaseValidatorView):
     model = <model>
     validation_rule = <validation_rule>
 ```
@@ -19,7 +19,7 @@ class TeamCreateView(JsonCreateView):
 ### Example
 
 ```
-class TeamCreateView(JsonCreateView):
+class TeamCreateView(BaseValidatorView):
     model = Team
     validation_rule = create_team
 ```
