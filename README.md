@@ -1,6 +1,13 @@
 # Django payload validator
 This package can validate data provided as payload in request body. This is similar to django forms, but only difference being this works on json data provided throuogh body of a request rather than HTML forms.
 
+### installation
+
+- #### from pypi
+   - ```pip install django-payload-validator```
+- #### from this github repo
+   - ```pip install -e git+https://github.com/gladsonvm/django_payload_validator.git#egg=django_payload_validator```
+
 ### Usage
 
 ```
