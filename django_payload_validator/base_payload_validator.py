@@ -1,7 +1,14 @@
-class PayloadValidator(object):
+from response.response import Response
+from django.http import JsonResponse
+from operator import attrgetter
+
+
+class BasePayloadValidator(object):
     """
     This class bounds all methods necessary to validate request data and provide a formatted output
     """
+    error_dict = dict()
+
     def validate_request_data(self):
         """
         This method is the entry point for provide formatted data after successful validation.
